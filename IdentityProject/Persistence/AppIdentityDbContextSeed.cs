@@ -1,9 +1,9 @@
 using Core.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace Infrastructure.Identity
+namespace Persistence
 {
-    public class static AppIdentityDbContextSeed
+    public class AppIdentityDbContextSeed
     {
         public static async Task SeedUsersAsync(UserManager<AppUser> userManager)
         {
