@@ -491,3 +491,17 @@ $RECYCLE.BIN/
 /playwright/.auth/
 /user.json
 .azure
+
+**/obj/
+**/bin/
+
+/IdentityProject/API/obj/
+/IdentityProject/Core/obj/
+/IdentityProject/Infrastructure/obj/
+/IdentityProject/Persistence/obj/
+
+/IdentityProject/API/bin/
+/IdentityProject/Core/bin/
+/IdentityProject/Infrastructure/bin/
+/IdentityProject/Persistence/bin/
+

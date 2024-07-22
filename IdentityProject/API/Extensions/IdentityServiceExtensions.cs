@@ -1,10 +1,14 @@
 using System.Text;
-using Core.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+
+using Core.Entities;
 using Persistence;
+using Core.Interfaces.Services;
+using Infrastructure.Services;
+
 
 namespace API.Extensions
 {
@@ -15,7 +19,7 @@ namespace API.Extensions
         {
             services.AddDbContext<AppIdentityDbContext>(opt =>
             {
-                opt.UseNpgsql(config.GetConnectionString("IdentityConnection"));
+                opt.UseSqlite(config.GetConnectionString("IdentityConnection"));
             });
 
             services.AddIdentityCore<AppUser>(opt => 
@@ -24,7 +28,6 @@ namespace API.Extensions
             })
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddSignInManager<SignInManager<AppUser>>();
-
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => 
                 {
