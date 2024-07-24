@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
 using API.Dtos;
+using AutoMapper;
 using Core.Entities;
-using Core.Entities.OrderAggregate;
+using Core.Entities.Identity;
 
 namespace API.Helpers
 {
@@ -13,8 +9,7 @@ namespace API.Helpers
     {
         public MappingProfiles()
         {
-            CreateMap<Core.Entities.Address, AddressDto>().ReverseMap();
-            CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>();
+            CreateMap<Core.Entities.Identity.Address, AddressDto>().ReverseMap();
         }
     }
 }

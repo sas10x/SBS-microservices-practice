@@ -1,14 +1,10 @@
 using System.Text;
+using Core.Entities.Identity;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
-using Core.Entities;
-using Persistence;
-using Core.Interfaces.Services;
-using Infrastructure.Services;
-
 
 namespace API.Extensions
 {
@@ -28,6 +24,7 @@ namespace API.Extensions
             })
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddSignInManager<SignInManager<AppUser>>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => 
                 {
@@ -37,7 +34,8 @@ namespace API.Extensions
                         IssuerSigningKey  = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Token:Key"])),
                         ValidIssuer = config["Token:Issuer"],
                         ValidateIssuer = true,
-                        ValidateAudience = false
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
                     };
                 });
 
