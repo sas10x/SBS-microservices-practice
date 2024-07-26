@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\API\\API.csproj": {}
+    "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\api\\API.csproj": {}
   },
   "projects": {
-    "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\API\\API.csproj": {
+    "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\api\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\API\\API.csproj",
+        "projectUniqueName": "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\api\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\API\\API.csproj",
+        "projectPath": "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\api\\API.csproj",
         "packagesPath": "C:\\Users\\kristan.rae.arcino\\.nuget\\packages\\",
-        "outputPath": "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\API\\obj\\",
+        "outputPath": "C:\\10x\\SBS-microservices-practice\\ShoppingProject\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kristan.rae.arcino\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -46,6 +46,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.0, )"
+            },
+            "MassTransit.RabbitMQ": {
+              "target": "Package",
+              "version": "[8.1.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",

@@ -4,8 +4,10 @@ using API.Errors;
 using API.Helpers;
 using AutoMapper;
 using Core.Entities;
+using Core.Events;
 using Core.Interfaces;
 using Core.Specifications;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,15 +18,18 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IGenericRepository<Product> _productsRepo;
         private readonly IMapper _mapper;
+        private readonly IPublishEndpoint _publishEndpoint;
 
         public ProductsController(IGenericRepository<Product> productsRepo,
             IGenericRepository<ProductType> productTypeRepo,
-            IGenericRepository<ProductBrand> productBrandRepo, IMapper mapper)
+            IGenericRepository<ProductBrand> productBrandRepo, IMapper mapper,
+            IPublishEndpoint publishEndpoint)
         {
             _mapper = mapper;
             _productsRepo = productsRepo;
             _productTypeRepo = productTypeRepo;
             _productBrandRepo = productBrandRepo;
+            _publishEndpoint = publishEndpoint;
         }
         
         [UserAuthenticationFilter]
@@ -45,7 +50,6 @@ namespace API.Controllers
                 productParams.PageSize, totalItems, data));
         }
 
-        [Cached(600)]
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
@@ -56,6 +60,14 @@ namespace API.Controllers
             var product = await _productsRepo.GetEntityWithSpec(spec);
 
             if (product == null) return NotFound(new ApiResponse(404));
+
+            await _publishEndpoint.Publish(
+                new ProductEvent
+                {
+                    Id = product.Id,
+                    Message = $"Customer viewing {product.Description}.",
+                    CreatedAt = DateTime.Now
+                });
 
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }
