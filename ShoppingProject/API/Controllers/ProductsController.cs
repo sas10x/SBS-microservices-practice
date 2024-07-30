@@ -61,13 +61,15 @@ namespace API.Controllers
 
             if (product == null) return NotFound(new ApiResponse(404));
 
-            await _publishEndpoint.Publish(
-                new ProductEvent
+            var productEvent =  new ProductEvent
                 {
                     Id = product.Id,
                     Message = $"Customer viewing {product.Description}.",
                     CreatedAt = DateTime.Now
-                });
+                };
+            Console.Write("Hello1", productEvent.Id + productEvent.Message);
+
+            await _publishEndpoint.Publish(productEvent);
 
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }

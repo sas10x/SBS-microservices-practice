@@ -10,20 +10,14 @@ namespace Infrastructure.Events
 {
     public class ProductCreatedConsumer : IConsumer<ProductEvent>
     {
-        private readonly AppIdentityDbContext _context;
-
-        public ProductCreatedConsumer (AppIdentityDbContext context)
+        public ProductCreatedConsumer ()
         {
-            _context = context;
+           
         }
 
-        public async Task Consume(ConsumeContext<ProductEvent> context)
+        public async Task Consume(ConsumeContext<ProductEvent> productEvent)
         {
-            Console.Write(context.Message.Id);
-            Console.Write(context.Message.Message);
-            // _context.Add(article);
-
-            // await _context.SaveChangesAsync();
+            Console.WriteLine("Consuming animal created " + productEvent.Message.Id);
         }
     }
 }
